@@ -1,7 +1,10 @@
 import express from "express"
 import connectionPool from "./utils/db.mjs";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
 app.use(express.json());
 const port = 4000;
@@ -35,6 +38,47 @@ app.post("/register", async (req, res) => {
         res.status(500).json({ error: "Database error" });
     }
 });
+
+app.post("/login", async (req,res) => {
+    const {username , password} = req.body
+
+    try{
+        const result = await connectionPool.query(
+            "SELECT * FROM users WHERE username = $1",
+            [username]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(400).json({message: "User not found"})
+        }
+        const user = result.rows[0];
+
+        const isMatch  = await bcrypt.compare(password, user.password)
+
+        if (!isMatch) {
+            return res.status(400).json({message: " Incorrect password"})
+        }
+
+
+        const token = jwt.sign(
+            {user_id: user.user_id, firstName: user.first_name, lastName: user.last_name},
+            process.env.SECRET_KEY,
+            {
+                expiresIn: "20m"
+            }
+        );
+
+        res.json({
+            message: "login successful",
+            token
+        });
+
+    } catch (err) {
+        res.status(500).json({message: "server error"});
+    }
+
+});
+
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
