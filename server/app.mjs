@@ -12,8 +12,6 @@ const port = 4000;
 app.post("/register", async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
-        console.log(req.body);
-
 
         if (!username || !password) {
             return res.status(400).json({ error: "username and password are required" });
@@ -79,6 +77,27 @@ app.post("/login", async (req,res) => {
 
 });
 
+app.post("/create-book", async (req, res) => {
+  try {
+    const { bookname, bookinfor } = req.body;
+
+    const result = await connectionPool.query(
+      `INSERT INTO book (book_name, book_infor)
+       VALUES ($1, $2)
+       RETURNING book_id`,
+      [bookname, bookinfor]
+    );
+
+    return res.status(200).json({
+      message: "Create Successful",
+      book_id: result.rows[0].book_id,
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
