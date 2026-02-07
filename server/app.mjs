@@ -99,6 +99,72 @@ app.post("/create-book", async (req, res) => {
   }
 });
 
+app.get("/read-book", async (req,res) => {
+
+    let results
+    
+    const bookname = req.query.book_name
+    const bookinfor = req.query.book_infor
+
+    try{
+        results = await connectionPool.query(`
+            select * from book
+            WHERE
+                (book_name = $1 or $1 is null or $1 = '')
+                and
+                (book_infor = $2 or $2 is null or $2 = '')`,
+            [bookname,bookinfor])
+
+    }catch (err){
+        console.error(err);
+        res.status(500).json({ error: "Database error" });
+    }
+    
+    return res.status(200).json({
+        data: results.rows
+    })
+});
+
+app.get("/read-book/:bookId", async(req,res) => {
+
+    let result
+
+    try{
+        const bookIdFromClient= req.params.bookId
+
+        result = await connectionPool.query(
+            `SELECT * FROM book WHERE book_id = $1`,
+            [bookIdFromClient]
+        );
+
+        if (!result.rows[0]){
+            return res.status(404).json({
+                message: `can't not find a book 
+                (book id: ${bookIdFromClient})`
+            })
+        }
+
+    } catch (err){
+        console.error(err)
+        res.status(500).json({ error: "Database error" });
+    }
+
+    return res.status(200).json({
+        data: result.rows[0]
+    });
+})
+
+
+
+
+// app.update("/update", (req,res) => {
+
+// });
+
+// app.delete("/delete-book", (req,res) => {
+
+// });
+
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
 });
