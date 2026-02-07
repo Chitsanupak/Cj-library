@@ -26,6 +26,7 @@ function jwtInterceptor(){
                 window.localStorage.removeItem("token");
                 window.location.replace("/login");
             }
+            return Promise.reject(error);
         }
     );
 }
