@@ -155,11 +155,35 @@ app.get("/read-book/:bookId", async(req,res) => {
 })
 
 
+app.put("/book/:bookId", async (req,res) => {
+    
+    try{
+        const bookIdFromClient = req.params.bookId;
+        const updateBook = {...req.body, updated_at: new Date()};
+
+        await connectionPool.query(
+            `
+            UPDATE book
+            SET book_name = $1,
+                book_infor = $2
+            WHERE book_id = $3`,
+            [
+                updateBook.bookname,
+                updateBook.bookinfor,
+                bookIdFromClient
+            ]
+        );
+
+    }catch (err){
+        console.error(err)
+        res.status(500).json({ error: "Database error" });
+    }
+    return res.status(200).json({
+        message: "Updted post sucessfully"
+    });
+})
 
 
-// app.update("/update", (req,res) => {
-
-// });
 
 // app.delete("/delete-book", (req,res) => {
 
