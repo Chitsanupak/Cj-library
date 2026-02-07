@@ -185,9 +185,34 @@ app.put("/book/:bookId", async (req,res) => {
 
 
 
-// app.delete("/delete-book", (req,res) => {
+app.delete("/book/:bookId", async (req,res) => {
 
-// });
+    let result
+    
+    try{
+        const bookIdFromClient = req.params.bookId;
+
+        result = await connectionPool.query(
+            `DELETE FROM book
+            WHERE book_id = $1`,
+            [bookIdFromClient]
+        )
+
+        if (!result.rows[0]){
+            return res.status(404).json({
+                message: `can't not find a book 
+                (book id: ${bookIdFromClient})`
+            })
+        }
+
+    }catch (err){
+        console.error(err)
+        res.status(500).json({ error: "Database error" });
+    }
+    return res.status(200).json({
+        message : " Delete book sucessfully"
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
