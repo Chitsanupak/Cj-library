@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+
+<body>
+    <center>
+        <div>
+        <header>
+            <img src="/server/image/CJ_LIBRARY.png" width="500"  >
+        </header>
+
+    </div>
+        <!-- id -->
+        <div>
+            <div>
+            <label >ID</label>
+            <input type="text" id="username">
+            <i></i>
+        </div><br>
+
+        <!-- รหัสผ่าน -->
+        <div>
+            <label >รหัสผ่าน</label>
+            <input type="password" id="password">
+        </div><br>
+
+        <!-- เข้าสู่ระบบ -->
+        <div>
+            <button onclick="onlogin()">เข้าสู่ระบบ</button>
+        </div><br>
+    </div>
+    
+    
+
+    <!-- สมัครสมาชิก -->
+     <div>
+        <button>สมัครสมาชิก</button>
+     </div>
+    </center>
+
+    <script>
+        async function onlogin() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            try {
+                const res = await fetch("http://localhost:4000/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    alert("Login Success!");
+                    console.log("TOKEN:", data.token);
+
+                    localStorage.setItem("token", data.token);
+
+                } else {
+                    alert(data.message);
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Server Error");
+            }
+        }
+
+    </script>
+
+</body>
+</html>
