@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import dotenv from "dotenv";
 import bookRouter from "./routes/book.mjs";
 import authenRouter from "./routes/authentication.mjs";
+import { validatePostData } from "./middlewares/bookpost.validation.mjs";
 
 
 dotenv.config();
