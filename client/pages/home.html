@@ -8,17 +8,17 @@
     <style>
         .navbar{
             display: flex;
+            align-items: center;
+            background-color: #2e4053;
         }
 
         .navhome{
-            background-color: aquamarine;
             flex: 0.5;
+            border-left: 10px;
+                
         }
 
-        .navchina{
-            background-color: aqua;
-            flex: 2;
-        }
+
         body {
         background: #101820;
         font-family: sans-serif;
@@ -65,18 +65,37 @@
             cursor: pointer;
         }
 
+        .row {
+            display: flex;
+            gap: 20px;
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        .left-section {
+            flex: 3;
+        }
+
+        
+        .right-section {
+            flex: 1.2;
+        }
+
+
     </style>
 </head>
 
 <body>
 
    <div class="navbar">
-        <div class="navhome">home</div>
-        <div class="navchina">หนังสือจีน</div>
+        <img src="/server/image/CJ_LIBRARY.png" width="100px" height="px">
+        <div class="navhome">หนังสือจีน</div>
+        <div class="navhome">หนังสือจีน</div>
+        <div class="navhome">หนังสือจีน</div>
+        <div class="navhome">หนังสือจีน</div>
+        <input type="text" placeholder="หาหนังสือ">
    </div>
 
-
-   
 
    <div class="section">
         <h2 class="section-title">หนังสือใหม่ยอดฮิต</h2>
@@ -89,27 +108,27 @@
             <div class="card">การ์ด 5</div>
         </div>
     </div>
-
-    <div class="section">
-        <h2 class="section-title">อัปเดตใหม่ล่าสุด</h2>
-
-        <div class="card-container">
-            <div class="card">การ์ด A</div>
-            <div class="card">การ์ด B</div>
-            <div class="card">การ์ด C</div>
+    
+    <div class="row">
+        <div class="section left-section">
+            <h2 class="section-title">อัปเดตใหม่ล่าสุด</h2>
+                <div class="card-container">
+                <div class="card">การ์ด A</div>
+                <div class="card">การ์ด B</div>
+                <div class="card">การ์ด C</div>
+            </div>
         </div>
-        </div>
 
-    <div class="section">
-        <h2 class="section-title">หนังสือติดอันดับ Top 10</h2>
+        <div class="section right-section">
+            <h2 class="section-title">หนังสือติดอันดับ Top 10</h2>
 
-        <div class="card-container">
-            <div class="card">อันดับ 1</div>
-            <div class="card">อันดับ 2</div>
-            <div class="card">อันดับ 3</div>
+            <div class="card-container">
+                <div class="card">อันดับ 1</div>
+                <div class="card">อันดับ 2</div>
+                <div class="card">อันดับ 3</div>
+            </div>
         </div>
     </div>
-
     
 
 
