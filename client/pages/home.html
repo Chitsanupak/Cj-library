@@ -4,26 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CJ-LIBRARY</title>
+
+    <style>
+        .navbar{
+            display: flex;
+        }
+
+        .navhome{
+            background-color: aquamarine;
+            flex: 0.5;
+        }
+
+        .navchina{
+            background-color: aqua;
+            flex: 2;
+        }
+        body {
+        background: #101820;
+        font-family: sans-serif;
+        color: white;
+        }
+
+        /* กล่องของแต่ละ Section */
+        .section {
+            background: #1f2a38;
+            padding: 20px;
+            margin: 30px auto;
+            width: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #0006;
+        }
+
+        /* หัวข้อแต่ละ Section */
+        .section-title {
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* ใช้ flex ทำให้การ์ดเรียงแนวนอน + scroll */
+        .card-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        /* การ์ดแต่ละใบ */
+        .card {
+            min-width: 180px;
+            height: 260px;
+            background: #2e4053;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+            flex-shrink: 0; /* ป้องกันการ์ดหด */
+            cursor: pointer;
+        }
+
+    </style>
 </head>
+
 <body>
-    <div>
-        <nav></nav>
-        <nav></nav>
-        <nav></nav>
-        <nav></nav>
+
+   <div class="navbar">
+        <div class="navhome">home</div>
+        <div class="navchina">หนังสือจีน</div>
+   </div>
+
+
+   
+
+   <div class="section">
+        <h2 class="section-title">หนังสือใหม่ยอดฮิต</h2>
+
+        <div class="card-container">
+            <div class="card">การ์ด 1</div>
+            <div class="card">การ์ด 2</div>
+            <div class="card">การ์ด 3</div>
+            <div class="card">การ์ด 4</div>
+            <div class="card">การ์ด 5</div>
+        </div>
     </div>
 
-    <table>
-        <tr>
-            <td>a</td> <td>a</td> <td>a</td>
-        </tr>
-        <tr>
-            <td>b</td> <td>b</td> <td>b</td>
-        </tr>
-        <tr>
-            <td>c</td> <td>c</td> <td>c</td>
-        </tr>
-    </table>
+    <div class="section">
+        <h2 class="section-title">อัปเดตใหม่ล่าสุด</h2>
+
+        <div class="card-container">
+            <div class="card">การ์ด A</div>
+            <div class="card">การ์ด B</div>
+            <div class="card">การ์ด C</div>
+        </div>
+        </div>
+
+    <div class="section">
+        <h2 class="section-title">หนังสือติดอันดับ Top 10</h2>
+
+        <div class="card-container">
+            <div class="card">อันดับ 1</div>
+            <div class="card">อันดับ 2</div>
+            <div class="card">อันดับ 3</div>
+        </div>
+    </div>
 
     
 
