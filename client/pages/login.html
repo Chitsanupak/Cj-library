@@ -9,25 +9,29 @@
 </head>
 
 <body>
-    <center>
-        <div>
+    
+    <div>
         <header>
             <img src="/server/image/CJ_LIBRARY.png" width="500"  >
         </header>
 
     </div>
         <!-- id -->
+    <div>
         <div>
-            <div>
-            <label >ID</label>
-            <input type="text" id="username">
+            username
+            <input 
+                type="text" 
+                id="username">
             <i></i>
         </div><br>
 
         <!-- รหัสผ่าน -->
         <div>
-            <label >รหัสผ่าน</label>
-            <input type="password" id="password">
+            password
+            <input 
+                type="password" 
+                id="password">
         </div><br>
 
         <!-- เข้าสู่ระบบ -->
@@ -36,44 +40,24 @@
         </div><br>
     </div>
     
-    
-
     <!-- สมัครสมาชิก -->
      <div>
         <button>สมัครสมาชิก</button>
      </div>
-    </center>
+    
 
     <script>
-        async function onlogin() {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-            try {
-                const res = await fetch("http://localhost:4000/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ username, password })
-                });
 
-                const data = await res.json();
+       function onlogin() {
+        let usernameDom = document.getElementById('username')
+        let passwordDom = document.getElementById('password')
 
-                if (res.ok) {
-                    alert("Login Success!");
-                    console.log("TOKEN:", data.token);
-
-                    localStorage.setItem("token", data.token);
-
-                } else {
-                    alert(data.message);
-                }
-
-            } catch (err) {
-                console.error(err);
-                alert("Server Error");
-            }
+        let loginData = {
+            username: usernameDom.value,
+            password: passwordDom.value
         }
+         console.log(loginData)
+       }
 
     </script>
 
