@@ -6,10 +6,12 @@ import dotenv from "dotenv";
 import bookRouter from "./routes/book.mjs";
 import authenRouter from "./routes/authentication.mjs";
 import { validatePostData } from "./middlewares/bookpost.validation.mjs";
+import cors from "cors";
 
 
 dotenv.config();
 const app = express();
+app.use(cors());
 app.use(express.json());
 const port = 4000;
 

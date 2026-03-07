@@ -3,7 +3,7 @@ import connectionPool from "../utils/db.mjs";
 import { validatePostData } from "../middlewares/bookpost.validation.mjs";
 import { validateGetByIdData } from "../middlewares/bookgetbyid.validation.mjs";
 import { validatePutData } from "../middlewares/bookput.validation.mjs";
-import { validateDeleteId } from "../middlewares/bookdelete.validation.mjs";
+
 
 const bookRouter = Router();
 
@@ -114,7 +114,7 @@ bookRouter.put("/:bookId", [validatePutData] ,async (req,res) => {
 })
 
 // ลบหนังสือ
-bookRouter.delete("/:bookId",[validateDeleteId], async (req,res) => {
+bookRouter.delete("/:bookId", async (req,res) => {
 
     let result
     
@@ -130,7 +130,7 @@ bookRouter.delete("/:bookId",[validateDeleteId], async (req,res) => {
 
         if (!result.rows[0]){
             return res.status(404).json({
-                message: `can't not find a book 
+                message: `Cannot find book
                 (book id: ${bookIdFromClient})`
             })
         }
