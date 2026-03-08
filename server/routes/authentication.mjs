@@ -1,6 +1,7 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
+import connectionPool from "../utils/db.mjs";
 
 const authenRouter = Router()
 
